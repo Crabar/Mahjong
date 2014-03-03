@@ -1,5 +1,9 @@
 package engines
 {
+	import animation.Fade;
+	
+	import engines.events.CardEvent;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -7,8 +11,6 @@ package engines
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	import animation.Fade;
-	import engines.events.CardEvent;
 	
 	[Event(name="cardOpen", type="engines.events.CardEvent")]
 	[Event(name="cardClose", type="engines.events.CardEvent")]
@@ -22,17 +24,12 @@ package engines
 			initBitmap();
 			buttonMode = true;
 			addEventListener(MouseEvent.CLICK, onCardClick);
-			_closeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onCloseTimerComplete);
 		}
 		
 		private var _back:BitmapData;
-		
-		private const _closeTime:uint = 1000;
-		private var _closeTimer:Timer = new Timer(_closeTime, 1);
-		
+		private var _closeTimer:Timer;
 		private var _destroying:Boolean = false;
 		private var _front:BitmapData;
-		
 		private var _image:Bitmap;
 		private var _isOpen:Boolean = false;
 		
@@ -43,10 +40,10 @@ package engines
 			dispatchEvent(new CardEvent(CardEvent.CARD_CLOSE));
 		}
 		
-		public function destroy():void
+		public function destroy(destroyTime:uint = 1000):void
 		{
 			_destroying = true;
-			var fade:Fade = new Fade(this, 1000);
+			var fade:Fade = new Fade(this, destroyTime);
 			fade.addEventListener(Event.COMPLETE, onFadeAnimationComplete);
 			fade.play();
 		}
@@ -56,12 +53,14 @@ package engines
 			return _front;
 		}
 		
-		public function open():void
+		public function open(timeToOpen:uint = 1000):void
 		{
 			_image.bitmapData = _front;
 			_isOpen = true;
 			dispatchEvent(new CardEvent(CardEvent.CARD_OPEN));
 			//
+			_closeTimer = new Timer(timeToOpen, 1);
+			_closeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onCloseTimerComplete, false, 0, true);
 			_closeTimer.start();
 		}
 		

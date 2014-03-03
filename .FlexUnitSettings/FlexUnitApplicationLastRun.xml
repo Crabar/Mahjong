@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="Mahjong">
-<testsuite name="tests:MainSuite" type="testcaseclass"/>
+<testsuite name="tests:CardTest" type="testsuiteclass"/>
+<testsuite name="tests:CardsGeneratorTest" type="testsuiteclass"/>
+<testsuite name="tests:CardsImagesLoaderTest" type="testsuiteclass"/>
+<testsuite name="tests:SimpleCardsPlacerTest" type="testsuiteclass"/>
 </testsuite>
 <portNumber value="8765" />
 </testrun>

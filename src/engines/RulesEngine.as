@@ -35,17 +35,20 @@ package engines
 		private function checkWin():void
 		{
 			if (_pairsCount == 0)
-			{
-				var winText:TextField = new TextField();
-				winText.text = "Congratulations! You won!";
-				var winTextFormat:TextFormat = new TextFormat(null, 32, 0x11aa11, true, true, false, "", "", TextFormatAlign.CENTER);
-				winText.setTextFormat(winTextFormat);
-				winText.selectable = false;
-				winText.width = _playGround.stage.stageWidth;
-				winText.height = 40;
-				winText.y = _playGround.stage.stageHeight / 2;
-				_playGround.addChild(winText);
-			}
+				showWinMessage();
+		}
+		
+		private function showWinMessage():void
+		{
+			var winText:TextField = new TextField();
+			winText.text = "Congratulations! You won!";
+			var winTextFormat:TextFormat = new TextFormat(null, 32, 0x11aa11, true, true, false, "", "", TextFormatAlign.CENTER);
+			winText.setTextFormat(winTextFormat);
+			winText.selectable = false;
+			winText.width = _playGround.stage.stageWidth;
+			winText.height = 40;
+			winText.y = _playGround.stage.stageHeight / 2;
+			_playGround.addChild(winText);
 		}
 		
 		private function destroyCard(card:Card):void

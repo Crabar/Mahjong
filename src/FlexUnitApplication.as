@@ -6,7 +6,10 @@ package
 	
 	import flexunit.flexui.FlexUnitTestRunnerUIAS;
 	
-	import tests.MainSuite;
+	import tests.CardTest;
+	import tests.CardsGeneratorTest;
+	import tests.CardsImagesLoaderTest;
+	import tests.SimpleCardsPlacerTest;
 	
 	public class FlexUnitApplication extends Sprite
 	{
@@ -26,7 +29,10 @@ package
 		public function currentRunTestSuite():Array
 		{
 			var testsToRun:Array = new Array();
-			testsToRun.push(tests.MainSuite);
+			testsToRun.push(tests.CardTest);
+			testsToRun.push(tests.CardsGeneratorTest);
+			testsToRun.push(tests.CardsImagesLoaderTest);
+			testsToRun.push(tests.SimpleCardsPlacerTest);
 			return testsToRun;
 		}
 	}
