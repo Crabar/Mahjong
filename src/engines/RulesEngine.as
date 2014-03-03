@@ -1,15 +1,10 @@
 package engines
 {
-	import animation.Fade;
-	
-	import engines.events.CardEvent;
-	
-	import flash.display.BitmapData;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
+	import engines.events.CardEvent;
 	
 	public class RulesEngine
 	{
@@ -55,16 +50,7 @@ package engines
 		
 		private function destroyCard(card:Card):void
 		{
-			card.destroying = true;
-			var fade:Fade = new Fade(card, 1000);
-			fade.addEventListener(Event.COMPLETE, onFadeAnimationComplete);
-			fade.play();
-		}
-		
-		private function onFadeAnimationComplete(event:Event):void
-		{
-			var card:Card = Card(event.target.target);
-			card.parent.removeChild(card);
+			card.destroy();
 		}
 		
 		private function isCardsEqual(firstCard:Card, secondCard:Card):Boolean
