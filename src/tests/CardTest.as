@@ -1,28 +1,16 @@
 package tests
 {
-	import engines.Card;
-	import engines.events.CardEvent;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.Sprite;
 	import flash.events.Event;
-	
+	import engines.Card;
+	import engines.events.CardEvent;
 	import flexunit.framework.Assert;
-	
 	import org.flexunit.async.Async;
 	
 	public class CardTest
 	{
-		
-		[Before]
-		public function setUp():void
-		{
-		}
-		
-		[After]
-		public function tearDown():void
-		{
-		}
 		
 		[BeforeClass]
 		public static function setUpBeforeClass():void
@@ -31,6 +19,18 @@ package tests
 		
 		[AfterClass]
 		public static function tearDownAfterClass():void
+		{
+		}
+		
+		private var _cardForDestroyTest:Card;
+		
+		[Before]
+		public function setUp():void
+		{
+		}
+		
+		[After]
+		public function tearDown():void
 		{
 		}
 		
@@ -53,10 +53,16 @@ package tests
 			card.close();
 		}
 		
-		[Test]
+		[Test(async)]
 		public function testDestroy():void
 		{
-			Assert.fail("Test method Not yet implemented");
+			_cardForDestroyTest = new Card(new BitmapData(1, 1), new BitmapData(1, 1));
+			var parent:Sprite = new Sprite();
+			parent.addChild(_cardForDestroyTest);
+			Assert.assertNotNull(_cardForDestroyTest.parent);
+			const destroyTime:uint = 2000;
+			_cardForDestroyTest.destroy(destroyTime);
+			Async.delayCall(this, afterDestroy, destroyTime + 50);
 		}
 		
 		[Test(async)]
@@ -67,10 +73,9 @@ package tests
 			card.open();
 		}
 		
-		private function onCardOpen(event:CardEvent, passThroughData:Object):void
+		private function afterDestroy():void
 		{
-			var cardImage:Bitmap = Bitmap(Card(event.target).getChildAt(0));
-			Assert.assertEquals("Card is not opened!", cardImage.bitmapData, Card(event.target).front);
+			Assert.assertNull("Card is not removed from parent!", _cardForDestroyTest.parent);
 		}
 		
 		private function onCardClose(event:CardEvent, passThroughData:Object):void
@@ -82,6 +87,12 @@ package tests
 		private function onCardEventTimeout(passThroughData:Object):void
 		{
 			Assert.fail("Card event is not dispatched!");
+		}
+		
+		private function onCardOpen(event:CardEvent, passThroughData:Object):void
+		{
+			var cardImage:Bitmap = Bitmap(Card(event.target).getChildAt(0));
+			Assert.assertEquals("Card is not opened!", cardImage.bitmapData, Card(event.target).front);
 		}
 	}
 }

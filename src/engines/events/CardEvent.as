@@ -4,10 +4,18 @@ package engines.events
 	
 	public class CardEvent extends Event
 	{
-		public static const CARD_OPEN:String = "cardOpen";
+		/**
+		 * Dispatched when target card is closed.
+		 * @default
+		 */
 		public static const CARD_CLOSE:String = "cardClose";
+		/**
+		 * Dispatched when target card is opened.
+		 * @default
+		 */
+		public static const CARD_OPEN:String = "cardOpen";
 		
-		public function CardEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function CardEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false)
 		{
 			super(type, bubbles, cancelable);
 		}

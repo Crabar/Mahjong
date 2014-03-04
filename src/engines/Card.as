@@ -1,9 +1,5 @@
 package engines
 {
-	import animation.Fade;
-	
-	import engines.events.CardEvent;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -11,6 +7,8 @@ package engines
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import animation.Fade;
+	import engines.events.CardEvent;
 	
 	[Event(name="cardOpen", type="engines.events.CardEvent")]
 	[Event(name="cardClose", type="engines.events.CardEvent")]
@@ -84,7 +82,8 @@ package engines
 		
 		private function onFadeAnimationComplete(event:Event):void
 		{
-			this.parent.removeChild(this);
+			if (parent)
+				parent.removeChild(this);
 		}
 	}
 }

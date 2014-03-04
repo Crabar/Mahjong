@@ -3,8 +3,17 @@ package engines
 	import flash.display.BitmapData;
 	import flash.errors.IOError;
 	
+	/**
+	 * Used for generating cards in random positions.
+	 * @author Crabar
+	 */
 	public class CardsGenerator
 	{
+		/**
+		 * 
+		 * @param frontImages Array of different front images for cards.
+		 * @param backImage Card's back image.
+		 */
 		public function CardsGenerator(frontImages:Vector.<BitmapData>, backImage:BitmapData)
 		{
 			_frontImages = frontImages;
@@ -41,7 +50,7 @@ package engines
 			}
 			
 			preparedCards.sortOn("weight", Array.NUMERIC);
-		
+			
 			for (var j:uint = 0; j < preparedCards.length; j++)
 			{
 				cards[j] = preparedCards[j].card;

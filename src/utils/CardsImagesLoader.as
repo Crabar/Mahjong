@@ -11,6 +11,9 @@ package utils
 	[Event(name="complete", type="flash.events.Event")]
 	public class CardsImagesLoader extends EventDispatcher
 	{
+		/**
+		 * Used for loading cards' images.
+		 */
 		public function CardsImagesLoader()
 		{
 		}

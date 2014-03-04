@@ -13,7 +13,8 @@ package animation
 		{
 			_goDown = goDown;
 			_target = target;
-			_changeFactor = (time / 1000) / target.stage.frameRate;
+			var curFR:Number = target.stage?target.stage.frameRate:24;
+			_changeFactor = (time / 1000) / curFR;
 			_animationTimer = new Timer(time, 1);
 			_animationTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onAnimationEnd);
 		}

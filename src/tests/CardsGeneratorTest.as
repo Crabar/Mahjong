@@ -56,6 +56,7 @@ package tests
 			var cardsCount:uint = 21;
 			_cardsGenerator.generateRandomCards(cardsCount);
 			//
+			cardsCount = 20;
 			var cards:Vector.<Card> = _cardsGenerator.generateRandomCards(cardsCount);
 			Assert.assertNotNull(cards);
 			Assert.assertEquals(cardsCount, cards.length);			

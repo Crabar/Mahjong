@@ -6,8 +6,17 @@ package engines
 	import flash.text.TextFormatAlign;
 	import engines.events.CardEvent;
 	
+	/**
+	 * Used to control game logic.
+	 * @author Crabar
+	 */
 	public class RulesEngine
 	{
+		/**
+		 *
+		 * @param playGround Sprite that contains cards.
+		 * @param cards Array of cards.
+		 */
 		public function RulesEngine(playGround:Sprite, cards:Vector.<Card>)
 		{
 			_playGround = playGround;
@@ -36,19 +45,6 @@ package engines
 		{
 			if (_pairsCount == 0)
 				showWinMessage();
-		}
-		
-		private function showWinMessage():void
-		{
-			var winText:TextField = new TextField();
-			winText.text = "Congratulations! You won!";
-			var winTextFormat:TextFormat = new TextFormat(null, 32, 0x11aa11, true, true, false, "", "", TextFormatAlign.CENTER);
-			winText.setTextFormat(winTextFormat);
-			winText.selectable = false;
-			winText.width = _playGround.stage.stageWidth;
-			winText.height = 40;
-			winText.y = _playGround.stage.stageHeight / 2;
-			_playGround.addChild(winText);
 		}
 		
 		private function destroyCard(card:Card):void
@@ -96,6 +92,19 @@ package engines
 			//
 			_openedCards = new Vector.<Card>();
 			_pairsCount--;
+		}
+		
+		private function showWinMessage():void
+		{
+			var winText:TextField = new TextField();
+			winText.text = "Congratulations! You won!";
+			var winTextFormat:TextFormat = new TextFormat(null, 32, 0x11aa11, true, true, false, "", "", TextFormatAlign.CENTER);
+			winText.setTextFormat(winTextFormat);
+			winText.selectable = false;
+			winText.width = _playGround.stage.stageWidth;
+			winText.height = 40;
+			winText.y = _playGround.stage.stageHeight / 2;
+			_playGround.addChild(winText);
 		}
 		
 		private function unblockPlayground():void

@@ -4,6 +4,10 @@ package engines.cardsPlacers
 	import flash.geom.Rectangle;
 	import engines.Card;
 	
+	/**
+	 * Basic cards' placer. Used for placing cards on playground.
+	 * @author Crabar
+	 */
 	public class SimpleCardsPlacer implements ICardsPlacer
 	{
 		public function SimpleCardsPlacer():void
@@ -19,11 +23,6 @@ package engines.cardsPlacers
 		
 		public function placeCards(target:Sprite, cards:Vector.<Card>):void
 		{
-			//			var cardSize:Number = calcOptimalCardSize(new Rectangle(paddingLeft,
-			//																	paddingTop,
-			//																	target.width - paddingRight,
-			//																	target.height - paddingBottom),
-			//																	cards.length);
 			var sideCount:uint = uint(Math.sqrt(cards.length));
 			const cardWidth:Number = cards[0].width;
 			const cardHeight:Number = cards[0].height;
